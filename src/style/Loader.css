@@ -1,0 +1,44 @@
+.circle{
+    position:absolute;
+    bottom:0%;
+    left:50%;
+    transform: translate(-50%);
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    border-top: 10px solid #fff !important;
+    border:10px solid rgba(255,255,255,.1);
+    animation:animate4 1.4s linear infinite;
+}
+h2 span{
+    animation:animate 2s linear infinite;
+}
+@keyframes animate {
+  0% {
+    color: #444;
+    opacity:0.7;
+  }
+  90% {
+    color:#ff0;
+    opacity:0.9;
+  }
+  100%{
+    opacity:1;
+  }
+}
+@keyframes animate4 {
+  0% {
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
+.marqSet{
+  position: absolute;
+  top: 90%;
+  color: #ff0;
+}
+.marqSet marquee{
+  font-size: 2em;
+}
