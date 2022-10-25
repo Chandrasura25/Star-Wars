@@ -8,11 +8,14 @@ import Table from './Table';
 
 function Home({ movies }) {
     const url = "https://swapi.dev/api/films/";
+    // const url1 = "http://anyorigin.com/go?url=https://swapi.dev/api/films/";
+
     const [allMovies, setallMovies] = useState([]);
     const [characters, setcharacters] = useState([])
     const [crawl, setcrawl] = useState("");
     const [errMessage, seterrMessage] = useState('')
     const [isLoading, setisLoading] = useState(true);
+    const [spin, setspin] = useState(false)
     const [loading, setloading] = useState(false);
     useEffect(() => {
         axios.get(url).then((result) => {
@@ -30,11 +33,13 @@ function Home({ movies }) {
         axios.get(url + id).then((result) => {
             setcrawl(result.data.opening_crawl)
             setloading(false)
+            setspin(true);
             let charact = result.data.characters
             let charat = [];
             charact.map((val) => {
-              axios.get(val).then((res) => {
-                return charat.push(res.data)
+                axios.get(val).then((res) => {
+                 charat.push({...res.data})
+                 setspin(false);
                 }).catch((err)=>{
                   seterrMessage(err.message)
                 })
@@ -44,7 +49,6 @@ function Home({ movies }) {
             seterrMessage(err.message)
         })
     }
-    console.log(characters)
     return (
         <>
             <div class="bgPulse">
@@ -54,8 +58,9 @@ function Home({ movies }) {
                     </div>
                     <img src={svg} alt="" />
                     <Dropdown movies={allMovies} loader={isLoading} getId={getId} error={errMessage} />
+                    <hr />
                     <Marquee crawl={crawl} loader={loading} error={errMessage} />
-                    <Table/>
+                    <Table characters={characters} spin={spin}/>
                 </div>
             </div>
         </>

@@ -1,0 +1,89 @@
+.info {
+  position: absolute;
+  top: 100%;
+  background: #333;
+  max-width: 80%;
+  left: 50%;
+  transform: translate(-50%);
+}
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.filter .gallery-filter {
+    padding: 0 15px;
+    width: 100%;
+    text-align: center;
+    margin: 20px;
+  }
+  .filter .gallery-filter .filter-item {
+    color: #ffe81f;
+    font-size: 18px;
+    text-transform: uppercase;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 10px;
+    border-bottom: 2px solid transparent;
+    line-height: 1.2;
+    transition: all 0.3s ease-in-out;
+  }
+  .filter .gallery-filter .filter-item.active {
+    color: #ff9800;
+    border-color: #ff9800;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table td,
+table th {
+  padding: 15px;
+  border: 1px solid #ffe81f;
+  text-align: center;
+  font-size: 16px;
+}
+table th,
+tfoot td {
+  background: #ffe81f;
+  color: #333;
+}
+table tbody tr:nth-child(even) {
+  background: #ffe81f;
+}
+table tbody tr:nth-child(odd) {
+  color: #ffe81f;
+}
+@media (max-width: 767px) {
+  table thead {
+    display: block;
+  }
+  table,
+  table tbody,
+  table tr,
+  table td,
+  table th {
+    display: block;
+    width: 100%;
+  }
+  table tr {
+    margin-bottom: 15px;
+  }
+  table td {
+    text-align: right;
+    padding-left: 10px;
+    text-align: right;
+    position: relative;
+  }
+  table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    text-align: left;
+    font-weight: bold;
+  }
+}
