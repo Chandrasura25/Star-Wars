@@ -6,7 +6,7 @@ import sortArray from 'sort-array'
 const Table = ({ characters, spin }) => {
     var total = 0;
     for (var i in characters) {
-        if(Number(characters[i].height)!==""){
+        if(Number(characters[i].height)!=="unknown"){
             total += Number(characters[i].height);
         }
     }
