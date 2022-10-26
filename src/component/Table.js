@@ -6,10 +6,12 @@ import sortArray from 'sort-array'
 const Table = ({ characters, spin }) => {
     var total = 0;
     for (var i in characters) {
-        // console.log(Number(characters[i].height))
-        total += Number(characters[i].height);
+        if(Number(characters[i].height)!==""){
+            total += Number(characters[i].height);
+        }
     }
-    // console.log(total * 0.0328)
+    let feet = (total * 0.0328)
+    let inches = (feet *12)
     const [toggle, settoggle] = useState(false)
     const [Onfilter, setOnfilter] = useState(false)
     const [filtered, setfiltered] = useState([])
@@ -62,14 +64,13 @@ const Table = ({ characters, spin }) => {
     if (filtered.length !== 0) {
         if(Onfilter === true){
             characters = filtered;
+            setOnfilter(false)
         }
         else{
-            setOnfilter(false)
             setfiltered([])
         }
     }
     
-    console.log(characters)
 
     return (
         <>
@@ -82,7 +83,7 @@ const Table = ({ characters, spin }) => {
                                 <span class="filter-item" onClick={() => { filter("male") }} data-filter="male">Male</span>
                                 <span class="filter-item" onClick={() => { filter("female") }} data-filter="female">Female</span>
                                 <span class="filter-item" onClick={() => { filter("hermaphrodite") }} data-filter="male">Hermaphrodite</span>
-                                <span class="filter-item" data-filter="n/a">N/A</span>
+                                <span class="filter-item" onClick={() => { filter("n/a") }}  data-filter="n/a">N/A</span>
                             </div>
                         </div>
                         <table>
@@ -103,7 +104,7 @@ const Table = ({ characters, spin }) => {
                             <tfoot>
                                 <tr>
                                     <td>Total:{characters.length}</td>
-                                    <td colSpan={2}>{total}</td>
+                                    <td colSpan={2}>{total} cm({feet}ft/{inches}in)</td>
                                 </tr>
                             </tfoot>
                         </table> </div>

@@ -3,7 +3,6 @@ import Spinner from './Spinner';
 import Loader from './Loader';
 
 const Marquee = ({ crawl, loader, error }) => {
-  console.log(crawl)
   return (
     <>
       {
