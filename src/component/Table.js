@@ -10,8 +10,8 @@ const Table = ({ characters, spin }) => {
             total += Number(characters[i].height);
         }
     }
-    let feet = (total * 0.0328)
-    let inches = (feet *12)
+    let feet = (total * 0.0328).toFixed(2)
+    let inches = (feet *12).toFixed(2)
     const [toggle, settoggle] = useState(false)
     const [Onfilter, setOnfilter] = useState(false)
     const [filtered, setfiltered] = useState([])
