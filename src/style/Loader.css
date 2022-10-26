@@ -42,10 +42,18 @@ h2 span{
 .marqSet marquee{
   font-size: 2em;
 }
+.errorM{
+  position: absolute;
+  top: 90%;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  color:#ff0;
+}
 @media (max-width: 700px) {
   .circle{
     width: 50px;
-    height: 50%;
+    height: 50px;
     top:100%;
   }
 }

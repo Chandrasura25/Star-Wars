@@ -6,11 +6,13 @@ import sortArray from 'sort-array'
 const Table = ({ characters, spin }) => {
     var total = 0;
     for (var i in characters) {
-        console.log(Number(characters[i].height))
+        // console.log(Number(characters[i].height))
         total += Number(characters[i].height);
     }
-    console.log(total * 0.0328)
+    // console.log(total * 0.0328)
     const [toggle, settoggle] = useState(false)
+    const [Onfilter, setOnfilter] = useState(false)
+    const [filtered, setfiltered] = useState([])
     const toggleName = () => {
         const tog = false;
         if (tog === toggle) {
@@ -50,25 +52,25 @@ const Table = ({ characters, spin }) => {
             settoggle(false)
         }
     }
-    const filterCon = document.querySelector('.gallery-filter')
-        const galleryItems = document.querySelectorAll('.gallery-item')
-        filterCon.addEventListener('click',(event)=>{
-            if(event.target.classList.contains('filter-item')){
-                filterCon.querySelector('.active').classList.remove('active');
-                event.target.classList.add('active');
-                const filterValue = event.target.getAttribute('data-filter');
-                galleryItems.forEach((item)=>{
-                    if (item.classList.contains(filterValue) || filterValue === 'all') {
-                        item.classList.add('show')
-                        item.classList.remove('hide')
-                    }
-                    else{
-                        item.classList.add('hide')
-                        item.classList.remove('show')
-            }
-                })
-            }
-        })
+    const filter = (e) => {
+        const filteredGender = characters.filter(
+            user => user.gender.toLowerCase() === e.toLowerCase()
+        );
+        setfiltered(filteredGender)
+        setOnfilter(true)
+    }
+    if (filtered.length !== 0) {
+        if(Onfilter === true){
+            characters = filtered;
+        }
+        else{
+            setOnfilter(false)
+            setfiltered([])
+        }
+    }
+    
+    console.log(characters)
+
     return (
         <>
             {spin ? <Spinner /> : <div className="info">
@@ -76,16 +78,17 @@ const Table = ({ characters, spin }) => {
                     <div className="filter">
                         <div class="row">
                             <div class="gallery-filter">
-                                <span class="filter-item active" data-filter="all">All</span>
-                                <span class="filter-item" data-filter="male">Male</span>
-                                <span class="filter-item" data-filter="female">Female</span>
+                                <span class="filter-item active" onClick={() => { filter("all") }} data-filter="all">All</span>
+                                <span class="filter-item" onClick={() => { filter("male") }} data-filter="male">Male</span>
+                                <span class="filter-item" onClick={() => { filter("female") }} data-filter="female">Female</span>
+                                <span class="filter-item" onClick={() => { filter("hermaphrodite") }} data-filter="male">Hermaphrodite</span>
                                 <span class="filter-item" data-filter="n/a">N/A</span>
                             </div>
                         </div>
                         <table>
                             <thead>
                                 <th onClick={toggleName}>Name</th>
-                                <th onClick={toggleGender}>Gender</th>
+                                <th onClick={toggleGender} className="gender">Gender</th>
                                 <th onClick={toggleHeight}>Height</th>
                             </thead>
                             <tbody>
